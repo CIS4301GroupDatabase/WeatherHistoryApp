@@ -144,14 +144,11 @@
         query = "SELECT total_precipitation, condition_date FROM daily_condition WHERE total_precipitation > '2.0' AND peak_wind_speed > '5.0'"; // A test query to make sure it works
         
         // query our server
-        $.ajax({  
-         	type: "GET",
-         	url: "http://localhost:8080/weatherdata?data=" + query, 
-         	dataType: "json",
-         	success: function(result) {
+        $.getJSON("http://localhost:8080/weatherdata?data=" + query)
+            .done(function (result) {
                 // result should contain the SQL results
                 console.log(result); //result it in json format, should be easy to lookup what we need based on our schema
-				
+
                 // TODO: fill in below with results
                 dailyStats.updateLat(20);
                 dailyStats.updateLong(80);
@@ -159,11 +156,12 @@
                 dailyStats.updateSunset("8:00PM");
 
                 // Check graphs.js -- draw function for what param 2 format should be
-                graphs.daily.draw("Title Text", [[[0, 5], [1, 6], [2,7]]]);
-            },
-            error: (function(error) {
+                graphs.daily.draw("Title Text", [[[0, 5], [1, 6], [2, 7]]]);
+            })
+            .fail(function (error) {
                 console.error(error);
             });
+  
 
 
         // TODO: REMOVE THIS ONCE QUERYING IS SETUP.
