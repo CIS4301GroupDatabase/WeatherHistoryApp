@@ -92,48 +92,4 @@
 
     graphs.daily = new Graph("daily-stats-graph");
     graphs.advanced = new Graph("advanced-stats-graph");
-
-    // var dailyChart = new CanvasJS.Chart("daily-stats-graph", {
-    //     theme: "light1", // "light2", "dark1", "dark2"
-    //     animationEnabled: true, // change to true
-    //     title:{
-    //         text: "Gainesville Airport - Jan 1, 1970 - Temperature"
-    //     },
-    //     data: [
-    //         {
-    //             // Change type to "bar", "area", "spline", "pie",etc.
-    //             type: "line",
-    //             dataPoints: [
-    //                 { label: "apple",  y: 10  },
-    //                 { label: "orange", y: 15  },
-    //                 { label: "banana", y: 25  },
-    //                 { label: "mango",  y: 30  },
-    //                 { label: "grape",  y: 28  }
-    //             ]
-    //         }
-    //     ]
-    // });
-    // dailyChart.render();
-    //
-    // var advancedChart = new CanvasJS.Chart("advanced-stats-graph", {
-    //     theme: "light1", // "light2", "dark1", "dark2"
-    //     animationEnabled: true, // change to true
-    //     title:{
-    //         text: "Gainesville Airport - Jan 1, 1970 - Jan 2, 1970 - Daily - Average - Temperature"
-    //     },
-    //     data: [
-    //         {
-    //             // Change type to "bar", "area", "spline", "pie",etc.
-    //             type: "line",
-    //             dataPoints: [
-    //                 { label: "apple",  y: 10  },
-    //                 { label: "orange", y: 15  },
-    //                 { label: "banana", y: 25  },
-    //                 { label: "mango",  y: 30  },
-    //                 { label: "grape",  y: 28  }
-    //             ]
-    //         }
-    //     ]
-    // });
-    // advancedChart.render();
 })(window.graphs = window.graphs || {});

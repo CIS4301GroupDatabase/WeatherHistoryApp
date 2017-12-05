@@ -112,12 +112,56 @@
         }
     }
 
+    function getDailySelected() {
+        var selected = {
+            airport: $(".daily-stats").find("[name='weather-station'] option:selected").val(),
+            month: $(".daily-stats").find("[name='month'] option:selected").val(),
+            day: $(".daily-stats").find("[name='day'] option:selected").val(),
+            year: $(".daily-stats").find("[name='year'] option:selected").val(),
+            graphType: $(".daily-stats").find("[name='graphType'] option:selected").val(),
+
+
+        };
+
+        return selected;
+    }
+
     var dailyStats = new DailyStats();
     $(".daily-stats select").change(function() {
 
         graphs.daily.loading();
         dailyStats.loading();
 
+
+        var selected = getDailySelected();
+        console.log(selected);
+
+        // Format: selected = { weatherStation: "gville", month: 1, day, 12, year: 2017, graphType: "temperature" }
+        // console.log(selected) if you want to view contents
+
+        // TODO: REPLACE BELOW WITH QUERY LOGIC USING selected
+        var query = "SELECT * FROM TABLE";
+        $.get("?query=" + query) // query our server
+            .done(function(result) {
+                // result should contain the SQL results
+                // console.log(result) to work with it
+
+                // TODO: fill in below with results
+                dailyStats.updateLat(20);
+                dailyStats.updateLong(80);
+                dailyStats.updateSunrise("6:00AM");
+                dailyStats.updateSunset("8:00PM");
+
+                // Check graphs.js -- draw function for what param 2 format should be
+                graphs.daily.draw("Title Text", [[[0, 5], [1, 6], [2,7]]]);
+            })
+            .fail(function(error) {
+                console.error(error);
+            });
+
+
+        // TODO: REMOVE THIS ONCE QUERYING IS SETUP.
+        // TODO: THIS IS JUST TO SHOW LOADING FEATURE
         setTimeout(function() {
             graphs.daily.draw("Title Text", [[[0, 5], [1, 6], [2,7]]]);
             dailyStats.updateLat(20);
