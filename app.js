@@ -1,7 +1,7 @@
 (function(graphs) {
     "use strict";
 
-    var QUERY_URL = "http://localhost:8080/weatherdata?data=";
+    var QUERY_URL = "http://192.168.1.79:8080/weatherdata?data=";
 
     function init() {
         $.when(populateDates(), populateLocations()).done(dailyStats.displaySelected);
@@ -205,17 +205,16 @@
                 query += " AND condition_date = TO_DATE('" + date + "', 'dd-mm-yyyy')";
                 $.getJSON(QUERY_URL + query)
                     .done(function (result) {
-                        console.log(result);
-
                         var data = [[]];
                         var series = data[0];
                         for (var i = 0; i < result.length; i++) {
-                            series.push([new Date(result[i]["TIME"], result[i][selected.graphType.toUpperCase()])])
+                            series.push([new Date(result[i]["TIME"]).getTime(), result[i][selected.graphType.toUpperCase()]])
                         }
 
+                        // TODO Fix graph title
+                        var titleText = $(".daily-stats option:selected").text();
 
-                        // Check graphs.js -- draw function for what param 2 format should be
-                        graphs.daily.draw("Title Text", [[[0, 5], [1, 6], [2, 7]]]);
+                        graphs.daily.draw(titleText, data);
                     });
             }
         }
