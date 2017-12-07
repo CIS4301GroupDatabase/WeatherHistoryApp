@@ -1,7 +1,7 @@
 (function(graphs) {
     "use strict";
 
-    var QUERY_URL = "http://192.168.1.79:8080/weatherdata?data=";
+    var QUERY_URL = "http://localhost:8080/weatherdata?data=";
 
     function init() {
         $.when(populateDates(), populateLocations()).done(function () {
